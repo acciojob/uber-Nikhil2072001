@@ -54,7 +54,13 @@ public class Driver {
         return tripBookingList;
     }
 
+    public Driver(String mobile, String password) {
+        this.mobile = mobile;
+        this.password = password;
+    }
+
     public void setTripBookingList(List<TripBooking> tripBookingList) {
         this.tripBookingList = tripBookingList;
     }
+
 }

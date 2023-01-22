@@ -9,11 +9,13 @@ public class Cab {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int perKmRate;
-    @Column(columnDefinition = "True")
+
     private boolean available;
     @OneToOne
     @JoinColumn
     private Driver driver;
+
+
 
     public int getId() {
         return id;
@@ -22,11 +24,10 @@ public class Cab {
     public Cab() {
     }
 
-    public Cab(int id, int perKmRate, boolean available, Driver driver) {
-        this.id = id;
+    public Cab( int perKmRate) {
+
         this.perKmRate = perKmRate;
-        this.available = available;
-        this.driver = driver;
+
     }
 
     public void setId(int id) {

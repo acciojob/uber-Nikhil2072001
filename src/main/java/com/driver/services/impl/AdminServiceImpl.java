@@ -44,7 +44,8 @@ return admin;
 	@Override
 	public void deleteAdmin(int adminId){
 		// Delete admin without using deleteById function
- adminRepository1.deleteById(adminId);
+		Admin a=adminRepository1.findById(adminId).get();
+		adminRepository1.delete(a);
 
 
 	}
