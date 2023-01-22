@@ -15,6 +15,7 @@ import com.driver.model.TripStatus;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -44,8 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public TripBooking bookTrip(int customerId, String fromLocation, String toLocation, int distanceInKm) throws Exception{
 		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE). If no driver is available, throw "No cab available!" exception
-		//Avoid using SQL
-		// null;
+		//Avoid using SQL query
 		List<Driver> drivers = driverRepository2.findAll();
 //		if(drivers.isEmpty()){
 //			throw new Exception("No cab available!");
@@ -62,6 +62,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if(getDriver==null){
 			throw new Exception("No cab available!");
 		}
+
+		//getDriver.getCab().setAvailable(false);
+
 		TripBooking newTrip = new TripBooking();
 		newTrip.setCustomer(customerRepository2.findById(customerId).get());
 		newTrip.setDriver(getDriver);
@@ -71,10 +74,15 @@ public class CustomerServiceImpl implements CustomerService {
 		newTrip.setBill(getDriver.getCab().getPerKmRate()*distanceInKm);
 		newTrip.setStatus(TripStatus.CONFIRMED);
 
-		getDriver.getTripBookingList().add(newTrip);
+
+//		List<TripBooking> list = getDriver.getTripBookings();
+//		list.add(newTrip);
+		getDriver.getTripBookings().add(newTrip);
 		driverRepository2.save(getDriver);
+
+
 		Customer customer = customerRepository2.findById(customerId).get();
-		customer.getTripBookingList().add(newTrip);
+		customer.getTripBookings().add(newTrip);
 		customerRepository2.save(customer);
 
 		tripBookingRepository2.save(newTrip);
@@ -94,6 +102,7 @@ public class CustomerServiceImpl implements CustomerService {
 		trip.setFromLocation(null);
 		trip.setDistanceInKm(0);
 		tripBookingRepository2.save(trip);
+
 
 	}
 
