@@ -9,7 +9,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int adminId;
     @Column(nullable = false,unique = true)
-    private String name;
+    private String username;
 
     private String password;
 
@@ -19,7 +19,7 @@ public class Admin {
 
     public Admin(int adminId, String name, String password) {
         this.adminId = adminId;
-        this.name = name;
+        this.username = name;
         this.password = password;
     }
 
@@ -27,12 +27,12 @@ public class Admin {
         this.adminId = adminId;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
