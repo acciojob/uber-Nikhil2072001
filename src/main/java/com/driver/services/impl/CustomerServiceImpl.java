@@ -51,7 +51,7 @@ customerRepository2.deleteById(customerId);
 		tripBooking.setToLocation(toLocation);
 		tripBooking.setCustomer(customer);
 		tripBooking.setTripBookingId(tripBooking.getTripBookingId());
-		tripBooking.setTripStatus(TripStatus.CONFIRMED);
+		tripBooking.setStatus(TripStatus.CONFIRMED);
 		customer.getTripBookingList().add(tripBooking);
 		customerRepository2.save(customer);
 		return tripBooking;
@@ -62,13 +62,13 @@ customerRepository2.deleteById(customerId);
 	public void cancelTrip(Integer tripId){
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
 		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
-		tripBooking.setTripStatus(TripStatus.CANCELED);
+		tripBooking.setStatus(TripStatus.CANCELED);
 		Customer customer =  tripBooking.getCustomer();
 		List<TripBooking> tripBookingList = new ArrayList<>();
 		tripBookingList = customer.getTripBookingList();
 		for(TripBooking tripBooking1 : tripBookingList){
 			if(tripBooking1.getTripBookingId()==(tripId)){
-				tripBooking1.setTripStatus(TripStatus.CANCELED);
+				tripBooking1.setStatus(TripStatus.CANCELED);
 				break;
 			}
 		}
@@ -79,7 +79,7 @@ customerRepository2.deleteById(customerId);
 		driverList = driver.getTripBookingList();
 		for(TripBooking trip : driverList){
 			if(trip.getTripBookingId()==tripId){
-				trip.setTripStatus(TripStatus.CANCELED);
+				trip.setStatus(TripStatus.CANCELED);
 				break;
 			}
 		}
@@ -94,13 +94,13 @@ customerRepository2.deleteById(customerId);
 	public void completeTrip(Integer tripId){
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
 TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
-tripBooking.setTripStatus(TripStatus.COMPLETED);
+tripBooking.setStatus(TripStatus.COMPLETED);
 Customer customer =  tripBooking.getCustomer();
 List<TripBooking> tripBookingList = new ArrayList<>();
 tripBookingList = customer.getTripBookingList();
 for(TripBooking tripBooking1 : tripBookingList){
 	if(tripBooking1.getTripBookingId()==(tripId)){
-		tripBooking1.setTripStatus(TripStatus.COMPLETED);
+		tripBooking1.setStatus(TripStatus.COMPLETED);
 		break;
 	}
 }
@@ -111,7 +111,7 @@ List<TripBooking> driverList = new ArrayList<>();
 driverList = driver.getTripBookingList();
 for(TripBooking trip : driverList){
 	if(trip.getTripBookingId()==tripId){
-		trip.setTripStatus(TripStatus.COMPLETED);
+		trip.setStatus(TripStatus.COMPLETED);
 		break;
 	}
 }
