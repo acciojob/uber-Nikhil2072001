@@ -88,6 +88,7 @@ customerRepository2.deleteById(customerId);
 
 
 		customerRepository2.save(customer);
+		tripBookingRepository2.save(tripBooking);
 	}
 
 	@Override
@@ -120,6 +121,7 @@ driverRepository2.save(driver);
 
 
 customerRepository2.save(customer);
+tripBookingRepository2.save(tripBooking);
 
 	}
 }
